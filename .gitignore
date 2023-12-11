@@ -3,3 +3,4 @@
 gitkey
 terraform.tfstate
 terraform.tfstate.backup
+errored.tfstate
