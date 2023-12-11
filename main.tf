@@ -111,5 +111,19 @@ resource "aws_route53_record" "webserver" {
   name    = "${var.hostname}.${var.hosted_zone_name}"
   type    = "A"
   ttl     = 300
-  records = [aws_instance.frontend.public_ip]
+  records = [aws_eip.frontend.public_ip]
+}
+
+##RESOURCE ELASTIC IP ##
+
+
+resource "aws_eip" "frontend" {
+  instance = aws_instance.frontend.id
+  domain   = "vpc"
+  tags = {
+    Name    = "frontedip-${var.project_name}-${var.project_env}"
+    project = var.project_name
+    env     = var.project_env
+    owner   = var.project_own
+  }
 }
