@@ -93,7 +93,7 @@ resource "aws_instance" "frontend" {
   ami                    = var.ami_id
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.git_key.key_name
-  vpc_security_group_ids = [aws_security_group.http_access.id, aws_security_group.ssh_access.id]
+  vpc_security_group_ids = [aws_security_group.http_access.id, aws_security_group.ssh_access.id, aws_security_group.monitor_access.id]
   user_data              = file("web.sh")
   tags = {
     Name    = "${var.project_name}-${var.project_env}"
